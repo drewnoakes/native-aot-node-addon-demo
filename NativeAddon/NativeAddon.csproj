@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <PublishAot>true</PublishAot>
+    <NativeLib>Shared</NativeLib>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <!-- After publish, copy the native binary to the repo root as a .node file -->
+  <Target Name="CopyNodeAddon" AfterTargets="Publish">
+    <Copy SourceFiles="$(NativeBinary)" DestinationFiles="$(MSBuildProjectDirectory)\..\NativeAddon.node" />
+    <Message Text="Copied native addon to $(MSBuildProjectDirectory)\..\NativeAddon.node" Importance="high" />
+  </Target>
+
+</Project>
